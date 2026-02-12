@@ -5,19 +5,21 @@ rover_state = {
 }
 cmd = input("Is there more in the command batch: ").strip().title()
 if cmd == "Yes":
-    while True:
-        part0 = input("What is the command: ").strip().title()
-        part1 = input("How much space to move")
-        if part0 == "Move":
+    for i in range(10):
+        part = input("What is the command and space: ").split()
+        if part[0] == "move":
             try:
-                space = int(part1)
+                space = int(part[1])
             except ValueError:
                 print("bad distance")
             else:
-                rover_state["y"] = space
-        elif part0 =="Dig":
-            rover_state["samples"] = 1
+                rover_state["y"] = rover_state["y"] + space
+        elif part[0] =="dig":
+            rover_state["samples"] = rover_state["samples"] + 1
         else:
             print("Unknown command")
-else:
     print(rover_state)
+elif cmd == "No":
+    print(rover_state)
+else: 
+    print("Unknown command")
